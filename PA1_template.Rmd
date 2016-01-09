@@ -68,13 +68,7 @@ rug(aggregatedata$avgstepsday)
 
 ```
 
-```{r}
-hist(aggregatedata$avgstepsday, col = "grey", xlab = "No. of steps per day", main = "No. of steps per day")
-abline(v = mean(aggregatedata$avgstepsday, na.rm = TRUE), col = "blue")
-text(13000, 25, "mean = 10,770", col = "blue")
-rug(aggregatedata$avgstepsday)
-
-```
+![Figure 1](https://github.com/lakshmyp/RepData_PeerAssessment1/blob/master/figure-html/unnamed-chunk-3-1.png)
 
 
 ## What is the average daily activity pattern?
@@ -98,6 +92,7 @@ axis(1, at = aggbyinterval$interval, cex.axis = 0.75)
 abline(v = aggbyinterval[which.max(aggbyinterval$avgsteps),]$interval, col = "blue", lwd = 2)
 text(aggbyinterval[which.max(aggbyinterval$avgsteps),]$interval + 200, 200, "max at 0835 = 206.17", col = "blue")
 ```
+![Figure 2](https://github.com/lakshmyp/RepData_PeerAssessment1/blob/master/figure-html/unnamed-chunk-4-1.png)
 
 
 
@@ -142,6 +137,8 @@ abline(v = mean(newagg$avgstepsday, na.rm = TRUE), col = "blue")
 rug(newagg$avgstepsday)
 
 ```
+![Figure 2](https://github.com/lakshmyp/RepData_PeerAssessment1/blob/master/figure-html/unnamed-chunk-7-1.png)
+
 
 Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
@@ -180,4 +177,4 @@ plot2<- xyplot(avgsteps2 ~ interval, data = weekdaydata, type ="l", ylab = "avg.
 grid.arrange(plot1,plot2, nrow = 2)
 
 ```
-
+![Figure 2](https://github.com/lakshmyp/RepData_PeerAssessment1/blob/master/figure-html/unnamed-chunk-8-1.png)
