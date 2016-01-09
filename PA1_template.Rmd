@@ -56,7 +56,8 @@ mean(aggregatedata$avgstepsday, na.rm = TRUE)
 median(aggregatedata$avgstepsday, na.rm = TRUE)
 
 ```
-
+Mean - 10766.19
+Median - 10765
 
 ```{r, echo = TRUE}
 
@@ -85,6 +86,8 @@ head(aggbyinterval)
 aggbyinterval[which.max(aggbyinterval$avgsteps),]$interval
 ```
 
+835
+
 ```{r, echo = TRUE}
 with(aggbyinterval, plot(interval, avgsteps, type = "l", main = "Average Daily Activity", xaxt = "n"))
 axis(1, at = aggbyinterval$interval, cex.axis = 0.75)
@@ -105,7 +108,7 @@ Calculate and report the total number of missing values in the dataset (i.e. the
 sum(is.na(activity$steps))
 
 ```
-
+2304
 
 **2304 rows with missing values**
 
@@ -143,6 +146,9 @@ rug(newagg$avgstepsday)
 Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
 **The median is closer to the mean once imputed values are used**
+
+Mean - 10766.19
+Median - 10766.19
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
