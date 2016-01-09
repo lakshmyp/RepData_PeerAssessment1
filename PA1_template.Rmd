@@ -29,8 +29,13 @@ datetime <- paste(date,time, sep =" ")
 datetime <- strptime(datetime, format = "%Y-%m-%d %H%M", tz ="")
 activity$datetime <- datetime
 
+```
+
+
+```{r}
 head(activity)
 ```
+
 
  
 
@@ -41,13 +46,16 @@ head(activity)
 
 aggregatedata <- aggregate(activity$steps, by = list(date), FUN = sum)
 names(aggregatedata)<- c("date", "avgstepsday")
-head(aggregatedata)
 
+
+```
+
+```{r}
+head(aggregatedata)
 mean(aggregatedata$avgstepsday, na.rm = TRUE)
 median(aggregatedata$avgstepsday, na.rm = TRUE)
 
 ```
-
 
 
 ```{r, echo = TRUE}
@@ -60,6 +68,13 @@ rug(aggregatedata$avgstepsday)
 
 ```
 
+```{r}
+hist(aggregatedata$avgstepsday, col = "grey", xlab = "No. of steps per day", main = "No. of steps per day")
+abline(v = mean(aggregatedata$avgstepsday, na.rm = TRUE), col = "blue")
+text(13000, 25, "mean = 10,770", col = "blue")
+rug(aggregatedata$avgstepsday)
+
+```
 
 
 ## What is the average daily activity pattern?

@@ -23,7 +23,11 @@ time <- sprintf("%04d", activity$interval)
 datetime <- paste(date,time, sep =" ")
 datetime <- strptime(datetime, format = "%Y-%m-%d %H%M", tz ="")
 activity$datetime <- datetime
+```
 
+
+
+```r
 head(activity)
 ```
 
@@ -37,6 +41,7 @@ head(activity)
 ## 6    NA 2012-10-01       25 2012-10-01 00:25:00
 ```
 
+
  
 
 ## What is mean total number of steps taken per day?
@@ -46,6 +51,10 @@ head(activity)
 
 aggregatedata <- aggregate(activity$steps, by = list(date), FUN = sum)
 names(aggregatedata)<- c("date", "avgstepsday")
+```
+
+
+```r
 head(aggregatedata)
 ```
 
@@ -77,6 +86,15 @@ median(aggregatedata$avgstepsday, na.rm = TRUE)
 
 
 
+```r
+hist(aggregatedata$avgstepsday, col = "grey", xlab = "No. of steps per day", main = "No. of steps per day")
+abline(v = mean(aggregatedata$avgstepsday, na.rm = TRUE), col = "blue")
+text(13000, 25, "mean = 10,770", col = "blue")
+rug(aggregatedata$avgstepsday)
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)\
+
 
 ```r
 hist(aggregatedata$avgstepsday, col = "grey", xlab = "No. of steps per day", main = "No. of steps per day")
@@ -85,8 +103,7 @@ text(13000, 25, "mean = 10,770", col = "blue")
 rug(aggregatedata$avgstepsday)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)\
-
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)\
 
 
 ## What is the average daily activity pattern?
@@ -127,7 +144,7 @@ abline(v = aggbyinterval[which.max(aggbyinterval$avgsteps),]$interval, col = "bl
 text(aggbyinterval[which.max(aggbyinterval$avgsteps),]$interval + 200, 200, "max at 0835 = 206.17", col = "blue")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)\
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)\
 
 
 
@@ -206,7 +223,7 @@ abline(v = mean(newagg$avgstepsday, na.rm = TRUE), col = "blue")
 rug(newagg$avgstepsday)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)\
+![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)\
 
 Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
@@ -245,5 +262,5 @@ plot2<- xyplot(avgsteps2 ~ interval, data = weekdaydata, type ="l", ylab = "avg.
 grid.arrange(plot1,plot2, nrow = 2)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)\
+![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)\
 
