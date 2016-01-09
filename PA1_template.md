@@ -3,7 +3,12 @@
 
 ## Loading and preprocessing the data##
 
-**Data source** [Activity Monitoring Data](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip)
+
+- Data source
+
+
+[Activity Monitoring Data](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip)
+
 
 
 ```r
@@ -38,6 +43,7 @@ head(activity)
 
 ```r
 #sum up the steps taken by day into a new vector
+
 aggregatedata <- aggregate(activity$steps, by = list(date), FUN = sum)
 names(aggregatedata)<- c("date", "avgstepsday")
 head(aggregatedata)
@@ -54,34 +60,29 @@ head(aggregatedata)
 ```
 
 ```r
-summary(aggregatedata$steps)
+mean(aggregatedata$avgstepsday, na.rm = TRUE)
 ```
 
 ```
-## Length  Class   Mode 
-##      0   NULL   NULL
+## [1] 10766.19
 ```
 
+```r
+median(aggregatedata$avgstepsday, na.rm = TRUE)
+```
 
-**Mean    - 10,770**
+```
+## [1] 10765
+```
 
-**Median  - 10,760**
 
 
 
 ```r
 hist(aggregatedata$avgstepsday, col = "grey", xlab = "No. of steps per day", main = "No. of steps per day")
-abline(v = mean(aggregatedata$steps, na.rm = TRUE), col = "blue")
-```
-
-```
-## Warning in mean.default(aggregatedata$steps, na.rm = TRUE): argument is not
-## numeric or logical: returning NA
-```
-
-```r
+abline(v = mean(aggregatedata$avgstepsday, na.rm = TRUE), col = "blue")
 text(13000, 25, "mean = 10,770", col = "blue")
-rug(aggregatedata$steps)
+rug(aggregatedata$avgstepsday)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)\
@@ -107,36 +108,28 @@ head(aggbyinterval)
 ## 6       25 2.0943396
 ```
 
+**Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?**
+
+```r
+aggbyinterval[which.max(aggbyinterval$avgsteps),]$interval
+```
+
+```
+## [1] 835
+```
+
+
 ```r
 with(aggbyinterval, plot(interval, avgsteps, type = "l", main = "Average Daily Activity", xaxt = "n"))
 axis(1, at = aggbyinterval$interval, cex.axis = 0.75)
 
-which.max(aggbyinterval$avgsteps)
-```
-
-```
-## [1] 104
-```
-
-```r
-aggbyinterval[104,]
-```
-
-```
-##     interval avgsteps
-## 104      835 206.1698
-```
-
-```r
 abline(v = aggbyinterval[which.max(aggbyinterval$avgsteps),]$interval, col = "blue", lwd = 2)
 text(aggbyinterval[which.max(aggbyinterval$avgsteps),]$interval + 200, 200, "max at 0835 = 206.17", col = "blue")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)\
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)\
 
-**Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?**
 
-**0835 - 0840**
 
 
 ## Imputing missing values
@@ -213,7 +206,7 @@ abline(v = mean(newagg$avgstepsday, na.rm = TRUE), col = "blue")
 rug(newagg$avgstepsday)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)\
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)\
 
 Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
@@ -252,5 +245,5 @@ plot2<- xyplot(avgsteps2 ~ interval, data = weekdaydata, type ="l", ylab = "avg.
 grid.arrange(plot1,plot2, nrow = 2)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)\
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)\
 
