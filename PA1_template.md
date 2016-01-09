@@ -79,20 +79,13 @@ median(aggregatedata$avgstepsday, na.rm = TRUE)
 
 
 ```r
-png('./figure-html/unnamed-chunk-3-1.png',width=800,height=600)
-
 hist(aggregatedata$avgstepsday, col = "grey", xlab = "No. of steps per day", main = "No. of steps per day")
 abline(v = mean(aggregatedata$avgstepsday, na.rm = TRUE), col = "blue")
 text(13000, 25, "mean = 10,770", col = "blue")
 rug(aggregatedata$avgstepsday)
-
-dev.off()
 ```
 
-```
-## png 
-##   2
-```
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)\
 
 
 
